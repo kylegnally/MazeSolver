@@ -6,27 +6,30 @@ using System.Threading.Tasks;
 
 namespace cis237_assignment2
 {
+    /// <summary>
+    /// Class to transpose any two-dimensional array.
+    /// </summary>
     class ArrayTransposer
     {
-        static char[,] transposedArray;
+        static char[,] _transposedArray;
 
-        static ArrayTransposer()
-        {
-            
-        }
-
+        /// <summary>
+        /// Public method used to transpose a two-dimensional char array (char[,]). 
+        /// </summary>
+        /// <param name="original"></param>
+        /// <returns>char[,]</returns>
         public char[,] TransposeArray(char[,] original)
         {
-            transposedArray = new char[original.GetLength(0), original.GetLength(1)];
+            _transposedArray = new char[original.GetLength(0), original.GetLength(1)];
             for (int i = 0; i < original.GetLength(0); i++)
             {
                 for (int j = 0; j < original.GetLength(1); j++)
                 {
-                    transposedArray[i, j] = original[j, i];
+                    _transposedArray[i, j] = original[j, i];
                 }
             }
 
-            return transposedArray;
+            return _transposedArray;
         }
     }
 }
