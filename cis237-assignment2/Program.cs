@@ -20,7 +20,8 @@ namespace cis237_assignment2
             // Note: You may want to make a smaller version to test and debug with.
             // You don't have to, but it might make your life easier.
             char[,] maze1 =
-            { { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#' },
+            { 
+            { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#' },
             { '#', '.', '.', '.', '#', '.', '.', '.', '.', '.', '.', '#' },
             { '#', '.', '#', '.', '#', '.', '#', '#', '#', '#', '.', '#' },
             { '#', '#', '#', '.', '#', '.', '.', '.', '.', '#', '.', '#' },
@@ -31,7 +32,8 @@ namespace cis237_assignment2
             { '#', '.', '.', '.', '.', '.', '.', '.', '.', '#', '.', '#' },
             { '#', '#', '#', '#', '#', '#', '.', '#', '#', '#', '.', '#' },
             { '#', '.', '.', '.', '.', '.', '.', '#', '.', '.', '.', '#' },
-            { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#' } };
+            { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#' }
+            };
 
             // Create a new instance of a mazeSolver.
             MazeSolver mazeSolver = new MazeSolver();
@@ -39,11 +41,30 @@ namespace cis237_assignment2
             // Create the second maze by transposing the first maze
             char[,] maze2 = transposeMaze(maze1);
 
+            for (int i = 0; i < maze2.GetLength(0); i++)
+            {
+                
+                    for (int j = 0; j < maze2.GetLength(1); j++)
+                    {
+                        if (j < maze2.GetLength(1))
+                        {
+                            Console.Write(maze2[i, j]);
+                            if (j == maze2.GetLength(1) - 1)
+                            {
+                                Console.Write(Environment.NewLine);
+                            }
+                        }
+                    }
+                
+            }
+
+            Console.WriteLine("Done!");
+
             // Solve the original maze.
             mazeSolver.SolveMaze(maze1, X_START, Y_START);
 
             // Solve the transposed maze.
-            mazeSolver.SolveMaze(maze2, X_START, Y_START);
+           // mazeSolver.SolveMaze(maze2, X_START, Y_START);
 
         }
 
@@ -69,7 +90,10 @@ namespace cis237_assignment2
         static char[,] transposeMaze(char[,] mazeToTranspose)
         {
             //Write code her to create a transposed maze.
-            return new char[1, 1];
+            ArrayTransposer transposer = new ArrayTransposer();
+            return transposer.TransposeArray(mazeToTranspose);
         }
+
+
     }
 }
