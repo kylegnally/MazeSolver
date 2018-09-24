@@ -15,9 +15,20 @@ namespace cis237_assignment2
         /// Feel free to change the return type, or add more parameters if you like, but it can be done
         /// exactly as it is here without adding anything other than code in the body.
         /// </summary>
-        public void SolveMaze(char[,] maze, int xStart, int yStart)
+        public void SolveMaze(MazeWriter writer, char[,] maze, int xStart, int yStart)
         {
             // Do work needed to use mazeTraversal recursive call and solve the maze.
+
+            // call MazeTraversal(coords) and start spinning our wheels
+            // if we could go forward one space in any direction, we returned true
+                // Write an X to that position in the array, invoke WriteMaze() from the MazeWriter class,
+                // and recursively call SolveMaze again, passing it the new values
+            // if we returned false, we back up and ... what? 
+              
+            // if we solved the maze
+                //return true
+
+            //else make a recursive call to this method using the current position as [xStart, yStart]
         }
 
 
@@ -31,6 +42,20 @@ namespace cis237_assignment2
         private void mazeTraversal()
         {
             // Implement maze traversal recursive call
+
+            // the following calls aren't actual. This is pseudocode only. 
+            // All four of these return a bool. Returning true re-calls SolveMaze with new coords <-- how???
+
+            // GoNorth, etc are notated as methods but probably don't actually need to be methods
+
+            // GoNorth(currentX, currentY) return true <-- Do the math for the coordinate calculations
+            // GoSouth(same) etc
+            // GoEast(same) etc
+            // GoWest(same) etc
+
+            // Write an O at the current position and invoke WriteMaze() from the MazeWriter class
+            // return false
+
         }
     }
 }
