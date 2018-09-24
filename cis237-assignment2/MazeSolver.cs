@@ -10,15 +10,16 @@ namespace cis237_assignment2
     /// </summary>
     class MazeSolver
     {
+        private MazeWriter writer = new MazeWriter();
         /// <summary>
         /// This is the public method that will allow someone to use this class to solve the maze.
         /// Feel free to change the return type, or add more parameters if you like, but it can be done
         /// exactly as it is here without adding anything other than code in the body.
         /// </summary>
-        public void SolveMaze(MazeWriter writer, char[,] maze, int xStart, int yStart)
+        public void SolveMaze(char[,] maze, int xStart, int yStart)
         {
             // Do work needed to use mazeTraversal recursive call and solve the maze.
-
+            mazeTraversal(maze, xStart, yStart);
             // call MazeTraversal(coords) and start spinning our wheels
             // if we could go forward one space in any direction, we returned true
                 // Write an X to that position in the array, invoke WriteMaze() from the MazeWriter class,
@@ -39,8 +40,25 @@ namespace cis237_assignment2
         /// More than likely you will need to pass in at a minimum the current position
         /// in X and Y maze coordinates. EX: mazeTraversal(int currentX, int currentY)
         /// </summary>
-        private void mazeTraversal()
+        private void mazeTraversal(char[,] maze, int currentX, int currentY)
         {
+
+            /*char[,] maze1 =
+            { 
+            { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#' },
+            { '#', '.', '.', '.', '#', '.', '.', '.', '.', '.', '.', '#' },
+            { '#', '.', '#', '.', '#', '.', '#', '#', '#', '#', '.', '#' },
+            { '#', '#', '#', '.', '#', '.', '.', '.', '.', '#', '.', '#' },
+            { '#', '.', '.', '.', '.', '#', '#', '#', '.', '#', '.', '.' },
+            { '#', '#', '#', '#', '.', '#', '.', '#', '.', '#', '.', '#' },
+            { '#', '.', '.', '#', '.', '#', '.', '#', '.', '#', '.', '#' },
+            { '#', '#', '.', '#', '.', '#', '.', '#', '.', '#', '.', '#' },
+            { '#', '.', '.', '.', '.', '.', '.', '.', '.', '#', '.', '#' },
+            { '#', '#', '#', '#', '#', '#', '.', '#', '#', '#', '.', '#' },
+            { '#', '.', '.', '.', '.', '.', '.', '#', '.', '.', '.', '#' },
+            { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#' }
+            };*/
+
             // Implement maze traversal recursive call
 
             // the following calls aren't actual. This is pseudocode only. 
@@ -52,6 +70,48 @@ namespace cis237_assignment2
             // GoSouth(same) etc
             // GoEast(same) etc
             // GoWest(same) etc
+
+            // GoNorth
+            while (currentY < maze.GetLength(1))
+            {
+                if (maze[currentX, (currentY - 1)].ToString().Contains("."))
+                {
+                    maze[currentX, (currentY - 1)] = char.Parse("X");
+                    Console.Write(writer.WriteMaze(maze));
+                    currentY = (currentY - 1);
+                    mazeTraversal(maze, currentX, currentY);
+                }
+
+                // GoEast
+                if (maze[(currentX + 1), currentY].ToString().Contains("."))
+                {
+                    maze[(currentX + 1), currentY] = char.Parse("X");
+                    Console.Write(writer.WriteMaze(maze));
+                    currentX = (currentX + 1);
+                    mazeTraversal(maze, currentX, currentY);
+                }
+
+                // GoSouth
+                if (maze[currentX, (currentY + 1)].ToString().Contains("."))
+                {
+                    maze[currentX, (currentY + 1)] = char.Parse("X");
+                    Console.Write(writer.WriteMaze(maze));
+                    currentY = (currentY + 1);
+                    mazeTraversal(maze, currentX, currentY);
+                }
+
+                // GoWest
+                if (maze[(currentX - 1), currentY].ToString().Contains("."))
+                {
+                    maze[(currentX - 1), currentY] = char.Parse("X");
+                    Console.Write(writer.WriteMaze(maze));
+                    currentX = (currentX - 1);
+                    mazeTraversal(maze, currentX, currentY);
+                }
+
+                maze[currentX, currentY] = char.Parse(("O"));
+                Console.Write(writer.WriteMaze(maze));
+            }
 
             // Write an O at the current position and invoke WriteMaze() from the MazeWriter class
             // return false

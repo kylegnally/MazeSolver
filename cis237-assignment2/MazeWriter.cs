@@ -34,6 +34,8 @@ namespace cis237_assignment2
                 }
             }
 
+            _mazeAsString += "\n";
+
             return _mazeAsString;
         }
     }

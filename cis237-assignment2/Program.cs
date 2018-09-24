@@ -41,15 +41,16 @@ namespace cis237_assignment2
 
             // Create a new instance of a mazeSolver.
 
-            // Create the second maze by transposing the first maze
-
-            char[,] maze2 = TransposeMaze(transposer, maze1);
-            Console.Write(mazeToDraw.WriteMaze(maze2));
             
-            Console.WriteLine("Done!");
+            
+            //Console.WriteLine("Done!");
 
             // Solve the original maze.
-            //mazeSolver.SolveMaze(maze1, X_START, Y_START);
+            mazeSolver.SolveMaze(maze1, X_START, Y_START);
+
+            // Create the second maze by transposing the first maze
+            //char[,] maze2 = TransposeMaze(transposer, maze1);
+            //Console.Write(mazeToDraw.WriteMaze(maze2));
 
             // Solve the transposed maze.
             // mazeSolver.SolveMaze(maze2, X_START, Y_START);
