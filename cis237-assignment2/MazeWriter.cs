@@ -22,6 +22,8 @@ namespace cis237_assignment2
         /// <returns>string</returns>
         public string WriteMaze(char[,] arrayToDraw)
         {
+            _mazeAsString = "";
+
             for (int i = 0; i < arrayToDraw.GetLength(0); i++)
             {
 
