@@ -44,7 +44,7 @@ namespace cis237_assignment2
             }
 
             // If what we see has a O in it, nope out
-            if (maze[currentX, currentY].ToString().Contains("O")) return;
+            //if (maze[currentX, currentY].ToString().Contains("O")) return;
 
             // GoNorth
             if (maze[currentX, (currentY - 1)].ToString().Contains("."))
