@@ -23,6 +23,8 @@ namespace cis237_assignment2
         public string WriteMaze(char[,] arrayToDraw)
         {
             _mazeAsString = "";
+            string replacement = "R";
+            arrayToDraw[0,7] = char.Parse(replacement);
 
             for (int i = 0; i < arrayToDraw.GetLength(0); i++)
             {
