@@ -39,26 +39,27 @@ namespace cis237_assignment2
 
             // draw the maze
 
+            maze[currentX, currentY] = char.Parse("X");
             Console.Write(writer.WriteMaze(maze));
 
             Console.WriteLine("The current position is " + currentX.ToString() + ", " + currentY.ToString());
             Console.WriteLine("We went " + wentThisWay + "from where we were last turn.");
-            
+
 
             // Did we reach an exit? (the only exit allowed should be the only case this is true)
-            //if (maze.GetLength(0) == currentX + 1 || maze.GetLength(1) == currentY + 1)
-            //{
-            //    Console.Write("Solved!");
-            //    return;
-            //}
+            if (maze.GetLength(0) == currentX + 1 || maze.GetLength(1) == currentY + 1)
+            {
+                Console.Write("Solved!");
+                return;
+            }
 
             // If what we see has a O in it, nope out
-            //if (maze[currentX, currentY].ToString().Contains("O")) return;
+            if (maze[currentX, currentY].ToString().Contains("O")) return;
 
             // GoWest
             if (maze[currentX, (currentY - 1)].ToString().Contains("."))
             {
-                maze[currentX, (currentY - 1)] = char.Parse("X");
+                //maze[currentX, (currentY - 1)] = char.Parse("X");
                 currentY = (currentY - 1);
                 wentThisWay = "west";
                 mazeTraversal(maze, currentX, currentY);
@@ -67,7 +68,7 @@ namespace cis237_assignment2
             // GoSouth
             if (maze[(currentX + 1), currentY].ToString().Contains("."))
             {
-                maze[(currentX + 1), currentY] = char.Parse("X");
+                //maze[(currentX + 1), currentY] = char.Parse("X");
                 currentX = (currentX + 1);
                 wentThisWay = "south";
                 mazeTraversal(maze, currentX, currentY);
@@ -76,7 +77,7 @@ namespace cis237_assignment2
             // GoEast
             if (maze[currentX, (currentY + 1)].ToString().Contains("."))
             {
-                maze[currentX, (currentY + 1)] = char.Parse("X");
+                //maze[currentX, (currentY + 1)] = char.Parse("X");
                 currentY = (currentY + 1);
                 wentThisWay = "east";
                 mazeTraversal(maze, currentX, currentY);
@@ -85,7 +86,7 @@ namespace cis237_assignment2
             // GoNorth
             if (maze[(currentX - 1), currentY].ToString().Contains("."))
             {
-                maze[(currentX - 1), currentY] = char.Parse("X");
+                //maze[(currentX - 1), currentY] = char.Parse("X");
                 currentX = (currentX - 1);
                 wentThisWay = "north";
                 mazeTraversal(maze, currentX, currentY);
