@@ -55,52 +55,48 @@ namespace cis237_assignment2
 
             // If what we see has a O in it, nope out
             //if (maze[currentX, currentY].ToString().Contains("O")) return;
-            
-                if (maze[currentX, (currentY - 1)].ToString().Contains("."))
-                {
-                    // set that y coordinate to be the current y coordinate
-                    currentY = (currentY - 1);
+                // GOWest
+            if (maze[currentX, (currentY - 1)].ToString().Contains("."))
+            {
+                // set that y coordinate to be the current y coordinate
+                currentY = (currentY - 1);
 
-                    // set the string to show which way we went
-                    wentThisWay = "west";
+                // set the string to show which way we went
+                wentThisWay = "west";
 
-                    // make a recursive call using this new position
-                    mazeTraversal(maze, currentX, currentY);
-                }
+                // make a recursive call using this new position
+                mazeTraversal(maze, currentX, currentY);
+            }
 
-                // GoSouth
-                // If the spot one position 'south' contains a "."...
-                if (maze[(currentX + 1), currentY].ToString().Contains("."))
-                {
-                    // set that x coordinate to be the current x coordinate
-                    currentX = (currentX + 1);
+            // GoSouth
+            // If the spot one position 'south' contains a "."...
+            if (maze[(currentX + 1), currentY].ToString().Contains("."))
+            {
+                // set that x coordinate to be the current x coordinate
+                currentX = (currentX + 1);
 
-                    // set the string to show which way we went
-                    wentThisWay = "south";
+                // set the string to show which way we went
+                wentThisWay = "south";
 
-                    // make a recursive call using this new position
-                    mazeTraversal(maze, currentX, currentY);
-                }
+                // make a recursive call using this new position
+                mazeTraversal(maze, currentX, currentY);
+            }
 
-                // GoEast
-                if (maze[currentX, (currentY + 1)].ToString().Contains("."))
-                {
-                    currentY = (currentY + 1);
-                    wentThisWay = "east";
-                    mazeTraversal(maze, currentX, currentY);
-                }
+            // GoEast
+            if (maze[currentX, (currentY + 1)].ToString().Contains("."))
+            {
+                currentY = (currentY + 1);
+                wentThisWay = "east";
+                mazeTraversal(maze, currentX, currentY);
+            }
 
-                // GoNorth
-                if (maze[(currentX - 1), currentY].ToString().Contains("."))
-                {
-                    currentX = (currentX - 1);
-                    wentThisWay = "north";
-                    mazeTraversal(maze, currentX, currentY);
-                }
-            
-
-            // GoWest
-            // If the spot one position 'west' contains a "."...
+            // GoNorth
+            if (maze[(currentX - 1), currentY].ToString().Contains("."))
+            {
+                currentX = (currentX - 1);
+                wentThisWay = "north";
+                mazeTraversal(maze, currentX, currentY);
+            }
             
 
             // if nothing contains a ".", we can't go in any direction. Draw an "O"
