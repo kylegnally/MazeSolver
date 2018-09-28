@@ -11,7 +11,6 @@ namespace cis237_assignment2
     /// </summary>
     class MazeSolver
     {
-        string wentThisWay = "";
         private MazeWriter writer = new MazeWriter();
         /// <summary>
         /// This is the public method that will allow someone to use this class to solve the maze.
@@ -24,83 +23,56 @@ namespace cis237_assignment2
             mazeTraversal(maze, xStart, yStart);
         }
 
-
         /// <summary>
         /// This should be the recursive method that gets called to solve the maze.
         /// Feel free to change the return type if you like, or pass in parameters that you might need.
         /// This is only a very small starting point.
         /// More than likely you will need to pass in at a minimum the current position
-        /// in X and Y maze coordinates. EX: mazeTraversal(int currentX, int currentY)
+        /// in X and Y maze coordinates. EX: mazeTraversal(int row, int col)
         /// </summary>
-        private void mazeTraversal(char[,] maze, int currentX, int currentY)
+        private void mazeTraversal(char[,] maze, int row, int col)
         {
-            int xNow = currentX;
-            int yNow = currentY;
 
-            // draw the maze
-
-            maze[currentX, currentY] = char.Parse("X");
+            maze[row, col] = char.Parse("X");
             Console.Write(writer.WriteMaze(maze));
 
-            Console.WriteLine("The current position is " + currentX.ToString() + ", " + currentY.ToString());
-            Console.WriteLine("We went " + wentThisWay + "from where we were last turn.");
-
-
             // Did we reach an exit? (the only exit allowed should be the only case this is true)
-            if (maze.GetLength(0) == currentX + 1 || maze.GetLength(1) == currentY + 1)
+            if (maze.GetLength(0) == row + 1 || maze.GetLength(1) == col + 1)
             {
                 Console.Write("Solved!");
                 Environment.Exit(0);
             }
 
-            // If what we see has a O in it, nope out
-            //if (maze[currentX, currentY].ToString().Contains("O")) return;
-                // GOWest
-            if (maze[currentX, (currentY - 1)].ToString().Contains("."))
+            // GoNorth
+            if (maze[(row - 1), col].ToString().Contains("."))
             {
-                // set that y coordinate to be the current y coordinate
-                currentY = (currentY - 1);
-
-                // set the string to show which way we went
-                wentThisWay = "west";
-
-                // make a recursive call using this new position
-                mazeTraversal(maze, currentX, currentY);
-            }
-
-            // GoSouth
-            // If the spot one position 'south' contains a "."...
-            if (maze[(currentX + 1), currentY].ToString().Contains("."))
-            {
-                // set that x coordinate to be the current x coordinate
-                currentX = (currentX + 1);
-
-                // set the string to show which way we went
-                wentThisWay = "south";
-
-                // make a recursive call using this new position
-                mazeTraversal(maze, currentX, currentY);
+                row = (row - 1);
+                mazeTraversal(maze, row, col);
             }
 
             // GoEast
-            if (maze[currentX, (currentY + 1)].ToString().Contains("."))
+            if (maze[row, (col + 1)].ToString().Contains("."))
             {
-                currentY = (currentY + 1);
-                wentThisWay = "east";
-                mazeTraversal(maze, currentX, currentY);
+                col = (col + 1);
+                mazeTraversal(maze, row, col);
             }
 
-            // GoNorth
-            if (maze[(currentX - 1), currentY].ToString().Contains("."))
+            // GoSouth
+            if (maze[(row + 1), col].ToString().Contains("."))
             {
-                currentX = (currentX - 1);
-                wentThisWay = "north";
-                mazeTraversal(maze, currentX, currentY);
+                row = (row + 1);
+                mazeTraversal(maze, row, col);
             }
-            
+
+            // GoWest
+            if (maze[row, (col - 1)].ToString().Contains("."))
+            {
+                col = (col - 1);
+                mazeTraversal(maze, row, col);
+            }
 
             // if nothing contains a ".", we can't go in any direction. Draw an "O"
-            maze[currentX, currentY] = char.Parse(("O"));
+            maze[row, col] = char.Parse(("O"));
 
         }
     }
