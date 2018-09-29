@@ -34,69 +34,70 @@ namespace cis237_assignment2
         /// </summary>
         private void mazeTraversal(char[,] maze, int row, int col)
         {
-
-            maze[row, col] = 'X';
-            Console.Write(writer.WriteMaze(maze));
-            System.Threading.Thread.Sleep(500);
-
-            //Did we reach an exit ? (the only exit allowed should be the only case this is true)
-            if (maze.GetLength(0) == row + 1 || maze.GetLength(1) == col + 1)
+            if (row < maze.GetLength(0) && col < maze.GetLength(1))
             {
-                Console.Write("Solved!");
-            }
-
-            // GoNorth
-            if (maze[(row - 1), col] == '.')
-            {
-                mazeTraversal(maze, row - 1, col);
-                if (wroteAnO)
+                maze[row, col] = 'X';
+                Console.Write(writer.WriteMaze(maze));
+                System.Threading.Thread.Sleep(250);
+                
+                #region GoNorth
+                // GoNorth
+                if (maze[(row - 1), col] == '.')
                 {
-                    Console.Write(writer.WriteMaze(maze));
-                    wroteAnO = false;
-                    System.Threading.Thread.Sleep(500);
+                    mazeTraversal(maze, row - 1, col);
+                    if (wroteAnO)
+                    {
+                        Console.Write(writer.WriteMaze(maze));
+                        wroteAnO = false;
+                        System.Threading.Thread.Sleep(250);
+                    }
                 }
-            }
+                #endregion
 
-            // GoSouth
-            if (maze[(row + 1), col] == '.')
-            {
-                mazeTraversal(maze, row + 1, col);
-                if (wroteAnO)
+                #region GoSouth
+                if (maze[(row + 1), col] == '.')
                 {
-                    Console.Write(writer.WriteMaze(maze));
-                    wroteAnO = false;
-                    System.Threading.Thread.Sleep(500);
+                    mazeTraversal(maze, row + 1, col);
+                    if (wroteAnO)
+                    {
+                        Console.Write(writer.WriteMaze(maze));
+                        wroteAnO = false;
+                        System.Threading.Thread.Sleep(250);
+                    }
                 }
-            }
+                #endregion
 
-            // GoEast
-            if (maze[row, (col + 1)] == '.')
-            {
-                mazeTraversal(maze, row, col + 1);
-                if (wroteAnO)
+                #region GoEast
+
+                if (maze[row, (col + 1)] == '.')
                 {
-                    Console.Write(writer.WriteMaze(maze));
-                    wroteAnO = false;
-                    System.Threading.Thread.Sleep(500);
+                    mazeTraversal(maze, row, col + 1);
+                    if (wroteAnO)
+                    {
+                        Console.Write(writer.WriteMaze(maze));
+                        wroteAnO = false;
+                        System.Threading.Thread.Sleep(250);
+                    }
                 }
-            }
+                #endregion
 
-            // GoWest
-            if (maze[row, (col - 1)] == '.')
-            {
-                mazeTraversal(maze, row, col - 1);
-                if (wroteAnO)
+                #region GoWest
+                if (maze[row, (col - 1)] == '.')
                 {
-                    Console.Write(writer.WriteMaze(maze));
-                    wroteAnO = false;
-                    System.Threading.Thread.Sleep(500);
+                    mazeTraversal(maze, row, col - 1);
+                    if (wroteAnO)
+                    {
+                        Console.Write(writer.WriteMaze(maze));
+                        wroteAnO = false;
+                        System.Threading.Thread.Sleep(250);
+                    }
                 }
+                #endregion
+
+                // if nothing contains a ".", we can't go in any direction. Draw an "O"
+                maze[row, col] = 'O';
+                wroteAnO = true;
             }
-
-            // if nothing contains a ".", we can't go in any direction. Draw an "O"
-            maze[row, col] = 'O';
-            wroteAnO = true;
-
         }
     }
 }
