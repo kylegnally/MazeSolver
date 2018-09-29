@@ -69,7 +69,6 @@ namespace cis237_assignment2
 
                 #region GoEast
 
-                Console.Write(" the row is: " + row.ToString() + ". The column will be: " + (col + 1).ToString() + ".");
                 if (maze[row, (col + 1)] == '.')
                 {
                     MazeTraversal(maze, row, col + 1);
