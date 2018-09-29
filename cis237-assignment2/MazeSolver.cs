@@ -33,7 +33,7 @@ namespace cis237_assignment2
         private void mazeTraversal(char[,] maze, int row, int col)
         {
 
-            maze[row, col] = char.Parse("X");
+            maze[row, col] = 'X';
             Console.Write(writer.WriteMaze(maze));
 
             // Did we reach an exit? (the only exit allowed should be the only case this is true)
@@ -44,35 +44,35 @@ namespace cis237_assignment2
             }
 
             // GoNorth
-            if (maze[(row - 1), col].ToString().Contains("."))
+            if (maze[(row - 1), col] == '.')
             {
                 row = (row - 1);
                 mazeTraversal(maze, row, col);
             }
 
             // GoEast
-            if (maze[row, (col + 1)].ToString().Contains("."))
+            if (maze[row, (col + 1)] == '.')
             {
                 col = (col + 1);
                 mazeTraversal(maze, row, col);
             }
 
             // GoSouth
-            if (maze[(row + 1), col].ToString().Contains("."))
+            if (maze[(row + 1), col] == '.')
             {
                 row = (row + 1);
                 mazeTraversal(maze, row, col);
             }
 
             // GoWest
-            if (maze[row, (col - 1)].ToString().Contains("."))
+            if (maze[row, (col - 1)] == '.')
             {
                 col = (col - 1);
                 mazeTraversal(maze, row, col);
             }
 
             // if nothing contains a ".", we can't go in any direction. Draw an "O"
-            maze[row, col] = char.Parse(("O"));
+            maze[row, col] = 'O';
 
         }
     }
