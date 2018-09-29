@@ -94,10 +94,11 @@ namespace cis237_assignment2
                 }
                 #endregion
 
-                // if nothing contains a ".", we can't go in any direction. Draw an "O"
-                maze[row, col] = 'O';
-                wroteAnO = true;
+                
             }
+            // if nothing contains a ".", we can't go in any direction. Draw an "O"
+            maze[row, col] = 'O';
+            wroteAnO = true;
         }
     }
 }
