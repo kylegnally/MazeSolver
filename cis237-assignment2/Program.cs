@@ -56,15 +56,18 @@ namespace cis237_assignment2
             //Console.WriteLine("Done!");
 
             // Solve the original maze.
-            mazeSolver.SolveMaze(maze1, X_START, Y_START);
 
-            // Create the second maze by transposing the first maze
-            //char[,] maze2 = TransposeMaze(transposer, maze1);
-            //Console.Write(mazeToDraw.WriteMaze(maze2));
-
-            // Solve the transposed maze.
-            // mazeSolver.SolveMaze(maze2, X_START, Y_START);
-
+            if (mazeSolver.SolveMaze(maze1, X_START, Y_START))
+            {
+                Console.WriteLine("Maze 1 is solved!\n\nSolving Maze 2...");
+                // Create the second maze by transposing the first maze
+                char[,] maze2 = TransposeMaze(transposer, maze1);
+                //Console.Write(mazeToDraw.WriteMaze(maze2));
+                if (mazeSolver.SolveMaze(maze2, X_START, Y_START))
+                {
+                    Console.WriteLine("Maze 2 is solved!\n\nexiting program...");
+                }
+            }
         }
 
         /// <summary>
