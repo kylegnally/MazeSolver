@@ -20,8 +20,8 @@ namespace cis237_assignment2
         /// </summary>
         public bool SolveMaze(char[,] maze, int xStart, int yStart)
         {
-            // Do work needed to use mazeTraversal recursive call and solve the maze.
-            mazeTraversal(maze, xStart, yStart);
+            // Do work needed to use MazeTraversal recursive call and solve the maze.
+            MazeTraversal(maze, xStart, yStart);
             return true;
         }
 
@@ -30,9 +30,9 @@ namespace cis237_assignment2
         /// Feel free to change the return type if you like, or pass in parameters that you might need.
         /// This is only a very small starting point.
         /// More than likely you will need to pass in at a minimum the current position
-        /// in X and Y maze coordinates. EX: mazeTraversal(int row, int col)
+        /// in X and Y maze coordinates. EX: MazeTraversal(int row, int col)
         /// </summary>
-        private void mazeTraversal(char[,] maze, int row, int col)
+        private void MazeTraversal(char[,] maze, int row, int col)
         {
             if (row < maze.GetLength(0) && col < maze.GetLength(1))
             {
@@ -44,7 +44,7 @@ namespace cis237_assignment2
                 // GoNorth
                 if (maze[(row - 1), col] == '.')
                 {
-                    mazeTraversal(maze, row - 1, col);
+                    MazeTraversal(maze, row - 1, col);
                     if (wroteAnO)
                     {
                         Console.Write(writer.WriteMaze(maze));
@@ -57,7 +57,7 @@ namespace cis237_assignment2
                 #region GoSouth
                 if (maze[(row + 1), col] == '.')
                 {
-                    mazeTraversal(maze, row + 1, col);
+                    MazeTraversal(maze, row + 1, col);
                     if (wroteAnO)
                     {
                         Console.Write(writer.WriteMaze(maze));
@@ -72,7 +72,7 @@ namespace cis237_assignment2
                 Console.Write(" the row is: " + row.ToString() + ". The column will be: " + (col + 1).ToString() + ".");
                 if (maze[row, (col + 1)] == '.')
                 {
-                    mazeTraversal(maze, row, col + 1);
+                    MazeTraversal(maze, row, col + 1);
                     if (wroteAnO)
                     {
                         Console.Write(writer.WriteMaze(maze));
@@ -85,7 +85,7 @@ namespace cis237_assignment2
                 #region GoWest
                 if (maze[row, (col - 1)] == '.')
                 {
-                    mazeTraversal(maze, row, col - 1);
+                    MazeTraversal(maze, row, col - 1);
                     if (wroteAnO)
                     {
                         Console.Write(writer.WriteMaze(maze));
