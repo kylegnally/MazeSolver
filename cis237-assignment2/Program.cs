@@ -1,4 +1,10 @@
-﻿using System;
+﻿/// <summary>
+/// Kyle Nally
+/// CIS237 Assignment 2 - Solve a Maze using Recursion
+/// 9/30/18
+/// </summary>
+
+using System;
 
 namespace cis237_assignment2
 {
@@ -9,8 +15,7 @@ namespace cis237_assignment2
         /// You are free to add anything else you would like to this program,
         /// however the maze solving part needs to occur in the MazeSolver class.
         /// </summary>
-        /// <param name="args"></param>
-        static void Main(string[] args)
+        static void Main()
         {
             // Starting Coordinates.
             const int X_START = 1;
@@ -45,16 +50,10 @@ namespace cis237_assignment2
             if (mazeSolver.SolveMaze(maze1, X_START, Y_START))
             {
                 Console.WriteLine("Maze 1 is solved!\n\nSolving Maze 2...");
+                // Since we wrote into the maze to mark the positions,
+                // we have to unwrite it back to its initial state
+                MazeReset(maze1);
                 System.Threading.Thread.Sleep(2000);
-            }
-
-            // Since we wrote into the maze, we have to unwrite it back to its initial state
-            for (int row = 0; row < maze1.GetLength(0); row++)
-            {
-                for (int col = 0; col < maze1.GetLength(1); col++)
-                {
-                    if ((maze1[row, col] == 'O') || (maze1[row, col]) == 'X') maze1[row, col] = '.';
-                }
             }
 
             // Create the second maze by transposing the first maze
@@ -63,32 +62,35 @@ namespace cis237_assignment2
             {
                 Console.WriteLine("Maze 2 is solved!\n\nexiting program...");
                 System.Threading.Thread.Sleep(2000);
+                Environment.Exit(0);
             }
         }
 
         /// <summary>
-        /// This method will take in a 2 dimensional char array and return
-        /// a char array maze that is flipped along the diagonal, or in mathematical
-        /// terms, transposed.
-        /// ie. if the array looks like 1, 2, 3
-        ///                             4, 5, 6
-        ///                             7, 8, 9
-        /// The returned result will be:
-        ///                             1, 4, 7
-        ///                             2, 5, 8
-        ///                             3, 6, 9
-        /// The current return statement is just a placeholder so the program
-        /// doesn't complain about no return value.
-        /// 
-        /// It is important that you return a "new" char array as the transposed maze.
-        /// If you do not, you could end up only solving the transposed maze.
+        /// Transposes a char[,].
         /// </summary>
+        /// <param name="arrayToTranspose"></param>
         /// <param name="mazeToTranspose"></param>
         /// <returns>transposedMaze</returns>
         static char[,] TransposeMaze(ArrayTransposer arrayToTranspose, char[,] mazeToTranspose)
         {
-            //Write code her to create a transposed maze.
             return arrayToTranspose.TransposeArray(mazeToTranspose);
+        }
+
+        /// <summary>
+        /// Method to reset the given maze to its initial unmarked state. Rewrites any
+        /// 'X' or 'O' present to '.'. Does not alter maze structure. 
+        /// </summary>
+        /// <param name="maze"></param>
+        static void MazeReset(char[,] maze)
+        {
+            for (int row = 0; row < maze.GetLength(0); row++)
+            {
+                for (int col = 0; col < maze.GetLength(1); col++)
+                {
+                    if ((maze[row, col] == 'O') || (maze[row, col]) == 'X') maze[row, col] = '.';
+                }
+            }
         }
     }
 }

@@ -1,28 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/// <summary>
+/// Kyle Nally
+/// CIS237 Assignment 2 - Solve a Maze using Recursion
+/// 9/30/18
+/// </summary>
 
 namespace cis237_assignment2
 {
     /// <summary>
     /// Class to return a two-dimensional char array (char[,]) as a string. 
     /// </summary>
-    class MazeWriter
+    class ArrayWriter
     {
-        private string _mazeAsString;
-
-        public MazeWriter() { }
+        private string _arrayAsString;
 
         /// <summary>
-        /// Constructs and formats a two-dimensional char array (char[,]) as a simple string.
+        /// Formats any two-dimensional char array (char[,]) as a simple string.
         /// </summary>
         /// <param name="arrayToDraw"></param>
         /// <returns>string</returns>
-        public string WriteMaze(char[,] arrayToDraw)
+        public string WriteArray(char[,] arrayToDraw)
         {
-            _mazeAsString = "";
+            _arrayAsString = "";
 
             for (int i = 0; i < arrayToDraw.GetLength(0); i++)
             {
@@ -30,15 +28,15 @@ namespace cis237_assignment2
                 for (int j = 0; j < arrayToDraw.GetLength(1); j++)
                 {
                     if (j >= arrayToDraw.GetLength(1)) continue;
-                    _mazeAsString += arrayToDraw[i, j];
+                    _arrayAsString += arrayToDraw[i, j];
                     if (j != arrayToDraw.GetLength(1) - 1) continue;
-                    _mazeAsString += "\n";
+                    _arrayAsString += "\n";
                 }
             }
 
-            _mazeAsString += "\n";
+            _arrayAsString += "\n";
 
-            return _mazeAsString;
+            return _arrayAsString;
         }
     }
 }

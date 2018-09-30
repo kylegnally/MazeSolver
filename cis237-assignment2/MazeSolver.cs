@@ -1,6 +1,10 @@
-﻿using System;
-using System.Runtime.InteropServices;
-using System.Runtime.Remoting.Messaging;
+﻿/// <summary>
+/// Kyle Nally
+/// CIS237 Assignment 2 - Solve a Maze using Recursion
+/// 9/30/18
+/// </summary>
+
+using System;
 
 namespace cis237_assignment2
 {
@@ -12,9 +16,8 @@ namespace cis237_assignment2
     /// </summary>
     class MazeSolver
     {
-        private MazeWriter writer = new MazeWriter();
-        private bool wroteAnO = false;
-        private bool solved = false;
+        private ArrayWriter _writer = new ArrayWriter();
+        private bool _wroteAnO;
         /// <summary>
         /// This is the public method that will allow someone to use this class to solve the maze.
         /// Feel free to change the return type, or add more parameters if you like, but it can be done
@@ -40,7 +43,7 @@ namespace cis237_assignment2
             if (row + 1 == maze.GetLength(0) || col + 1 == maze.GetLength(1))
             {
                 maze[row, col] = 'X';
-                Console.Write(writer.WriteMaze(maze));
+                Console.Write(_writer.WriteArray(maze));
                 return true;
             }
 
@@ -50,8 +53,8 @@ namespace cis237_assignment2
             if (row < maze.GetLength(0) && col < maze.GetLength(1))
             {
                 maze[row, col] = 'X';
-                Console.Write(writer.WriteMaze(maze));
-                System.Threading.Thread.Sleep(250);
+                Console.Write(_writer.WriteArray(maze));
+                System.Threading.Thread.Sleep(200);
                 
                 #region GoNorth
                 // if we're inside the maze and the space contains a '.'
@@ -64,17 +67,6 @@ namespace cis237_assignment2
                     // we will stop trying to go North (see final return statement at the end of
                     // MazeTraversal() for why this is important
                     if (MazeTraversal(maze, row - 1, col)) return true;
-
-                    // Did we write an O?
-                    if (wroteAnO)
-                    {
-                        // if we did, write out the maze
-                        Console.Write(writer.WriteMaze(maze));
-                        // set the flag back to false
-                        wroteAnO = false;
-                        // and take a breather
-                        System.Threading.Thread.Sleep(250);
-                    }
                 }
                 #endregion
 
@@ -87,12 +79,6 @@ namespace cis237_assignment2
                     // we will stop trying to go south (see final return statement at the end of
                     // MazeTraversal() for why this is important
                     if (MazeTraversal(maze, row + 1, col)) return true;
-                    if (wroteAnO)
-                    {
-                        Console.Write(writer.WriteMaze(maze));
-                        wroteAnO = false;
-                        System.Threading.Thread.Sleep(250);
-                    }
                 }
                 #endregion
 
@@ -105,12 +91,6 @@ namespace cis237_assignment2
                     // we will stop trying to go east (see final return statement at the end of
                     // MazeTraversal() for why this is important
                     if (MazeTraversal(maze, row, col + 1)) return true;
-                    if (wroteAnO)
-                    {
-                        Console.Write(writer.WriteMaze(maze));
-                        wroteAnO = false;
-                        System.Threading.Thread.Sleep(250);
-                    }
                 }
                 #endregion
 
@@ -123,23 +103,29 @@ namespace cis237_assignment2
                     // we will stop trying to go west (see final return statement at the end of
                     // MazeTraversal() for why this is important
                     if (MazeTraversal(maze, row, col - 1)) return true;
-                    if (wroteAnO)
-                    {
-                        Console.Write(writer.WriteMaze(maze));
-                        wroteAnO = false;
-                        System.Threading.Thread.Sleep(250);
-                    }
                 }
                 #endregion
 
-                // if nothing contains a ".", we can't go in any direction. Draw an "O"
+                // Did we write an O?
+                if (_wroteAnO)
+                {
+                    // If so, write the maze!
+                    Console.Write(_writer.WriteArray(maze));
+                    // reset the flag
+                    _wroteAnO = false;
+                    // get lunch
+                    System.Threading.Thread.Sleep(200);
+                }
+
+                // if nothing contains a ".", we can't go in any direction. Write an "O"
                 maze[row, col] = 'O';
-                wroteAnO = true;
+                // set the flag so we know we just wrote an O
+                _wroteAnO = true;
             }
-            // if the directions fail and we get here, it means we can't go any further. At this point,
-            // control returns back to the call that failed and the rest of the code following
-            // that call executes (check if we wrote an O, writing the maze to display that,
-            // resetting the flag to false, and taking a nap).
+            // if the directions fail and we get here it means we can't "go" any further in a given direction.
+            // At this point, control returns back to the call that failed (returned false)
+            // and the rest of the code following that call executes (check if we wrote an O,
+            // writing the maze to display that, resetting the flag to false, and taking a short nap).
             return false;
         }
     }
