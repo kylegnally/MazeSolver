@@ -8,12 +8,13 @@ using System;
 
 namespace cis237_assignment2
 {
+    /// <summary>
+    /// Main entry point. Main() lives here.
+    /// </summary>
     class Program
     {
         /// <summary>
         /// This is the main entry point for the program.
-        /// You are free to add anything else you would like to this program,
-        /// however the maze solving part needs to occur in the MazeSolver class.
         /// </summary>
         static void Main()
         {
@@ -24,8 +25,6 @@ namespace cis237_assignment2
             ArrayTransposer transposer = new ArrayTransposer();
 
             // The first maze that needs to be solved.
-            // Note: You may want to make a smaller version to test and debug with.
-            // You don't have to, but it might make your life easier.
             char[,] maze1 ={
 
             { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#' },

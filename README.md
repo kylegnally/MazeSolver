@@ -3,7 +3,7 @@
 
 ## Author
 
-
+Kyle Nally
 
 ## Description
 
@@ -50,6 +50,7 @@ Don't forget that you must have a base case for your recursive method or you wil
 
 ## Outside Resources Used
 
-
+Reddit, Stack Overflow.
 
 ## Known Problems, Issues, And/Or Errors in the Program
+None.
