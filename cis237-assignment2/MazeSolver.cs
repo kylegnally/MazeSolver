@@ -59,12 +59,20 @@ namespace cis237_assignment2
                 {
                     // drop an 'X'
                     maze[row, col] = 'X';
-
+                    // Check to see if we can go north by recursively calling MazeTraversal() using the
+                    // "new" coordinates. If we can go north, this returns true. If it returns false,
+                    // we will stop trying to go North (see final return statement at the end of
+                    // MazeTraversal() for why this is important
                     if (MazeTraversal(maze, row - 1, col)) return true;
+
+                    // Did we write an O?
                     if (wroteAnO)
                     {
+                        // if we did, write out the maze
                         Console.Write(writer.WriteMaze(maze));
+                        // set the flag back to false
                         wroteAnO = false;
+                        // and take a breather
                         System.Threading.Thread.Sleep(250);
                     }
                 }
@@ -74,6 +82,10 @@ namespace cis237_assignment2
                 if (row + 1 < maze.GetLength(0)  && maze[(row + 1), col] == '.')
                 {
                     maze[row, col] = 'X';
+                    // Check to see if we can go south by recursively calling MazeTraversal() using the
+                    // "new" coordinates. If we can go south, this returns true. If it returns false,
+                    // we will stop trying to go south (see final return statement at the end of
+                    // MazeTraversal() for why this is important
                     if (MazeTraversal(maze, row + 1, col)) return true;
                     if (wroteAnO)
                     {
@@ -88,6 +100,10 @@ namespace cis237_assignment2
                 if (col + 1 < maze.GetLength(1) && maze[row, (col + 1)] == '.')
                 {
                     maze[row, col] = 'X';
+                    // Check to see if we can go east by recursively calling MazeTraversal() using the
+                    // "new" coordinates. If we can go east, this returns true. If it returns false,
+                    // we will stop trying to go east (see final return statement at the end of
+                    // MazeTraversal() for why this is important
                     if (MazeTraversal(maze, row, col + 1)) return true;
                     if (wroteAnO)
                     {
@@ -102,6 +118,10 @@ namespace cis237_assignment2
                 if (col > 0 && maze[row, (col - 1)] == '.')
                 {
                     maze[row, col] = 'X';
+                    // Check to see if we can go west by recursively calling MazeTraversal() using the
+                    // "new" coordinates. If we can go west, this returns true. If it returns false,
+                    // we will stop trying to go west (see final return statement at the end of
+                    // MazeTraversal() for why this is important
                     if (MazeTraversal(maze, row, col - 1)) return true;
                     if (wroteAnO)
                     {
@@ -116,6 +136,9 @@ namespace cis237_assignment2
                 maze[row, col] = 'O';
                 wroteAnO = true;
             }
+            // if the directions fail and we get here, it means we can't go any further. At this point,
+            // control returns back to the call that failed and the rest of its code executes (check if we
+            // wrote an O, writing the maze to display that, resetting the flag to false, and taking a nap).
             return false;
         }
     }
