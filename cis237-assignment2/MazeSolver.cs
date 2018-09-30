@@ -36,14 +36,17 @@ namespace cis237_assignment2
         /// </summary>
         private bool MazeTraversal(char[,] maze, int row, int col)
         {
-            //if (solved) return true;
-
+            // if we've solved the maze, draw an X at the end, draw the maze, and return true
             if (row + 1 == maze.GetLength(0) || col + 1 == maze.GetLength(1))
             {
+                maze[row, col] = 'X';
                 Console.Write(writer.WriteMaze(maze));
                 return true;
             }
 
+            // if the current row is less than the total rows and the current column
+            // is less than the total columns, draw an X, print the maze, sleep, and
+            // start testing directions
             if (row < maze.GetLength(0) && col < maze.GetLength(1))
             {
                 maze[row, col] = 'X';
@@ -51,10 +54,12 @@ namespace cis237_assignment2
                 System.Threading.Thread.Sleep(250);
                 
                 #region GoNorth
-                // GoNorth
+                // if we're inside the maze and the space contains a '.'
                 if (row > 0 && maze[(row - 1), col] == '.')
                 {
+                    // drop an 'X'
                     maze[row, col] = 'X';
+
                     if (MazeTraversal(maze, row - 1, col)) return true;
                     if (wroteAnO)
                     {
@@ -63,13 +68,13 @@ namespace cis237_assignment2
                         System.Threading.Thread.Sleep(250);
                     }
                 }
-
                 #endregion
 
                 #region GoSouth
                 if (row + 1 < maze.GetLength(0)  && maze[(row + 1), col] == '.')
                 {
-                    if(MazeTraversal(maze, row + 1, col)) return true;
+                    maze[row, col] = 'X';
+                    if (MazeTraversal(maze, row + 1, col)) return true;
                     if (wroteAnO)
                     {
                         Console.Write(writer.WriteMaze(maze));
@@ -80,10 +85,10 @@ namespace cis237_assignment2
                 #endregion
 
                 #region GoEast
-
                 if (col + 1 < maze.GetLength(1) && maze[row, (col + 1)] == '.')
                 {
-                    if(MazeTraversal(maze, row, col + 1)) return true;
+                    maze[row, col] = 'X';
+                    if (MazeTraversal(maze, row, col + 1)) return true;
                     if (wroteAnO)
                     {
                         Console.Write(writer.WriteMaze(maze));
@@ -96,7 +101,8 @@ namespace cis237_assignment2
                 #region GoWest
                 if (col > 0 && maze[row, (col - 1)] == '.')
                 {
-                    if(MazeTraversal(maze, row, col - 1)) return true;
+                    maze[row, col] = 'X';
+                    if (MazeTraversal(maze, row, col - 1)) return true;
                     if (wroteAnO)
                     {
                         Console.Write(writer.WriteMaze(maze));

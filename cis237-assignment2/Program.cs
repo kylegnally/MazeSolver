@@ -17,24 +17,12 @@ namespace cis237_assignment2
             const int Y_START = 1;
 
             ArrayTransposer transposer = new ArrayTransposer();
-            MazeSolver mazeSolver = new MazeSolver();
-            MazeWriter mazeToDraw = new MazeWriter();
 
             // The first maze that needs to be solved.
             // Note: You may want to make a smaller version to test and debug with.
             // You don't have to, but it might make your life easier.
-            char[,] maze1 =
-                //{
-                //    {'#', '#', '#', '#', '#', '#', '#', '#'},
-                //    {'#', '.', '.', '.', '#', '.', '#', '#'},
-                //    {'#', '#', '#', '.', '#', '.', '#', '#'},
-                //    {'#', '.', '#', '.', '.', '.', '.', '#'},
-                //    {'#', '.', '#', '.', '#', '#', '.', '#'},
-                //    {'#', '.', '#', '.', '.', '#', '.', '#'},
-                //    {'#', '.', '.', '.', '#', '#', '.', '#'},
-                //    {'#', '#', '#', '#', '#', '#', '.', '#'}
-                
-            {
+            char[,] maze1 ={
+
             { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#' },
             { '#', '.', '.', '.', '#', '.', '.', '.', '.', '.', '.', '#' },
             { '#', '.', '#', '.', '#', '.', '#', '#', '#', '#', '.', '#' },
@@ -47,26 +35,33 @@ namespace cis237_assignment2
             { '#', '#', '#', '#', '#', '#', '.', '#', '#', '#', '.', '#' },
             { '#', '.', '.', '.', '.', '.', '.', '#', '.', '.', '.', '#' },
             { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#' }
+
         };
 
             // Create a new instance of a mazeSolver.
-
-
-
-            //Console.WriteLine("Done!");
+            MazeSolver mazeSolver = new MazeSolver();
 
             // Solve the original maze.
-
             if (mazeSolver.SolveMaze(maze1, X_START, Y_START))
             {
                 Console.WriteLine("Maze 1 is solved!\n\nSolving Maze 2...");
-                // Create the second maze by transposing the first maze
-                char[,] maze2 = TransposeMaze(transposer, maze1);
-                //Console.Write(mazeToDraw.WriteMaze(maze2));
-                if (mazeSolver.SolveMaze(maze2, X_START, Y_START))
+            }
+            
+            // Since we wrote into the maze, we have to unwrite it back to its initial state
+            for (int row = 0; row < maze1.GetLength(0); row++)
+            {
+                for (int col = 0; col < maze1.GetLength(1); col++)
                 {
-                    Console.WriteLine("Maze 2 is solved!\n\nexiting program...");
+                    if ((maze1[row, col] == 'O') || (maze1[row, col]) == 'X') maze1[row, col] = '.';
                 }
+            }
+
+            // Create the second maze by transposing the first maze
+            char[,] maze2 = TransposeMaze(transposer, maze1);
+            if (mazeSolver.SolveMaze(maze2, X_START, Y_START))
+            {
+                Console.WriteLine("Maze 2 is solved!\n\nexiting program...");
+                System.Threading.Thread.Sleep(2000);
             }
         }
 
