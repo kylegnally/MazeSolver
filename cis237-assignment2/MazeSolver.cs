@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Runtime.Remoting.Messaging;
 
 namespace cis237_assignment2
 {
@@ -13,6 +14,7 @@ namespace cis237_assignment2
     {
         private MazeWriter writer = new MazeWriter();
         private bool wroteAnO = false;
+        private bool solved = false;
         /// <summary>
         /// This is the public method that will allow someone to use this class to solve the maze.
         /// Feel free to change the return type, or add more parameters if you like, but it can be done
@@ -32,8 +34,16 @@ namespace cis237_assignment2
         /// More than likely you will need to pass in at a minimum the current position
         /// in X and Y maze coordinates. EX: MazeTraversal(int row, int col)
         /// </summary>
-        private void MazeTraversal(char[,] maze, int row, int col)
+        private bool MazeTraversal(char[,] maze, int row, int col)
         {
+            //if (solved) return true;
+
+            if (row + 1 == maze.GetLength(0) || col + 1 == maze.GetLength(1))
+            {
+                Console.Write(writer.WriteMaze(maze));
+                return true;
+            }
+
             if (row < maze.GetLength(0) && col < maze.GetLength(1))
             {
                 maze[row, col] = 'X';
@@ -42,63 +52,65 @@ namespace cis237_assignment2
                 
                 #region GoNorth
                 // GoNorth
-                if (maze[(row - 1), col] == '.')
+                if (row > 0 && maze[(row - 1), col] == '.')
                 {
-                    MazeTraversal(maze, row - 1, col);
-                    //if (wroteAnO)
-                    //{
-                    //    Console.Write(writer.WriteMaze(maze));
-                    //    wroteAnO = false;
-                    //    System.Threading.Thread.Sleep(250);
-                    //}
+                    maze[row, col] = 'X';
+                    if (MazeTraversal(maze, row - 1, col)) return true;
+                    if (wroteAnO)
+                    {
+                        Console.Write(writer.WriteMaze(maze));
+                        wroteAnO = false;
+                        System.Threading.Thread.Sleep(250);
+                    }
                 }
+
                 #endregion
 
                 #region GoSouth
-                if (maze[(row + 1), col] == '.')
+                if (row + 1 < maze.GetLength(0)  && maze[(row + 1), col] == '.')
                 {
-                    MazeTraversal(maze, row + 1, col);
-                    //if (wroteAnO)
-                    //{
-                    //    Console.Write(writer.WriteMaze(maze));
-                    //    wroteAnO = false;
-                    //    System.Threading.Thread.Sleep(250);
-                    //}
+                    if(MazeTraversal(maze, row + 1, col)) return true;
+                    if (wroteAnO)
+                    {
+                        Console.Write(writer.WriteMaze(maze));
+                        wroteAnO = false;
+                        System.Threading.Thread.Sleep(250);
+                    }
                 }
                 #endregion
 
                 #region GoEast
 
-                if (maze[row, (col + 1)] == '.')
+                if (col + 1 < maze.GetLength(1) && maze[row, (col + 1)] == '.')
                 {
-                    MazeTraversal(maze, row, col + 1);
-                    //if (wroteAnO)
-                    //{
-                    //    Console.Write(writer.WriteMaze(maze));
-                    //    wroteAnO = false;
-                    //    System.Threading.Thread.Sleep(250);
-                    //}
+                    if(MazeTraversal(maze, row, col + 1)) return true;
+                    if (wroteAnO)
+                    {
+                        Console.Write(writer.WriteMaze(maze));
+                        wroteAnO = false;
+                        System.Threading.Thread.Sleep(250);
+                    }
                 }
                 #endregion
 
                 #region GoWest
-                if (maze[row, (col - 1)] == '.')
+                if (col > 0 && maze[row, (col - 1)] == '.')
                 {
-                    MazeTraversal(maze, row, col - 1);
-                    //if (wroteAnO)
-                    //{
-                    //    Console.Write(writer.WriteMaze(maze));
-                    //    wroteAnO = false;
-                    //    System.Threading.Thread.Sleep(250);
-                    //}
+                    if(MazeTraversal(maze, row, col - 1)) return true;
+                    if (wroteAnO)
+                    {
+                        Console.Write(writer.WriteMaze(maze));
+                        wroteAnO = false;
+                        System.Threading.Thread.Sleep(250);
+                    }
                 }
                 #endregion
 
-                
+                // if nothing contains a ".", we can't go in any direction. Draw an "O"
+                maze[row, col] = 'O';
+                wroteAnO = true;
             }
-            // if nothing contains a ".", we can't go in any direction. Draw an "O"
-            maze[row, col] = 'O';
-            wroteAnO = true;
+            return false;
         }
     }
 }
