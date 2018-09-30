@@ -137,8 +137,9 @@ namespace cis237_assignment2
                 wroteAnO = true;
             }
             // if the directions fail and we get here, it means we can't go any further. At this point,
-            // control returns back to the call that failed and the rest of its code executes (check if we
-            // wrote an O, writing the maze to display that, resetting the flag to false, and taking a nap).
+            // control returns back to the call that failed and the rest of the code following
+            // that call executes (check if we wrote an O, writing the maze to display that,
+            // resetting the flag to false, and taking a nap).
             return false;
         }
     }

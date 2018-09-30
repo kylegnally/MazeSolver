@@ -45,8 +45,9 @@ namespace cis237_assignment2
             if (mazeSolver.SolveMaze(maze1, X_START, Y_START))
             {
                 Console.WriteLine("Maze 1 is solved!\n\nSolving Maze 2...");
+                System.Threading.Thread.Sleep(2000);
             }
-            
+
             // Since we wrote into the maze, we have to unwrite it back to its initial state
             for (int row = 0; row < maze1.GetLength(0); row++)
             {
