@@ -45,12 +45,12 @@ namespace cis237_assignment2
                 if (maze[(row - 1), col] == '.')
                 {
                     MazeTraversal(maze, row - 1, col);
-                    if (wroteAnO)
-                    {
-                        Console.Write(writer.WriteMaze(maze));
-                        wroteAnO = false;
-                        System.Threading.Thread.Sleep(250);
-                    }
+                    //if (wroteAnO)
+                    //{
+                    //    Console.Write(writer.WriteMaze(maze));
+                    //    wroteAnO = false;
+                    //    System.Threading.Thread.Sleep(250);
+                    //}
                 }
                 #endregion
 
@@ -58,12 +58,12 @@ namespace cis237_assignment2
                 if (maze[(row + 1), col] == '.')
                 {
                     MazeTraversal(maze, row + 1, col);
-                    if (wroteAnO)
-                    {
-                        Console.Write(writer.WriteMaze(maze));
-                        wroteAnO = false;
-                        System.Threading.Thread.Sleep(250);
-                    }
+                    //if (wroteAnO)
+                    //{
+                    //    Console.Write(writer.WriteMaze(maze));
+                    //    wroteAnO = false;
+                    //    System.Threading.Thread.Sleep(250);
+                    //}
                 }
                 #endregion
 
@@ -72,12 +72,12 @@ namespace cis237_assignment2
                 if (maze[row, (col + 1)] == '.')
                 {
                     MazeTraversal(maze, row, col + 1);
-                    if (wroteAnO)
-                    {
-                        Console.Write(writer.WriteMaze(maze));
-                        wroteAnO = false;
-                        System.Threading.Thread.Sleep(250);
-                    }
+                    //if (wroteAnO)
+                    //{
+                    //    Console.Write(writer.WriteMaze(maze));
+                    //    wroteAnO = false;
+                    //    System.Threading.Thread.Sleep(250);
+                    //}
                 }
                 #endregion
 
@@ -85,12 +85,12 @@ namespace cis237_assignment2
                 if (maze[row, (col - 1)] == '.')
                 {
                     MazeTraversal(maze, row, col - 1);
-                    if (wroteAnO)
-                    {
-                        Console.Write(writer.WriteMaze(maze));
-                        wroteAnO = false;
-                        System.Threading.Thread.Sleep(250);
-                    }
+                    //if (wroteAnO)
+                    //{
+                    //    Console.Write(writer.WriteMaze(maze));
+                    //    wroteAnO = false;
+                    //    System.Threading.Thread.Sleep(250);
+                    //}
                 }
                 #endregion
 
