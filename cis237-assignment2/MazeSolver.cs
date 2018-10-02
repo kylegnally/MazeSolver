@@ -125,6 +125,9 @@ namespace cis237_assignment2
             // At this point, control returns back to the call that failed (returned false)
             // and the rest of the code following that call executes (check if we wrote an O,
             // writing the maze to display that, resetting the flag to false, and taking a short nap).
+            // Once we've reached the end of the maze, all of the methods left on the call stack will "unwind"
+            // as each methos call on the stack resolves with the parameters it used at the time that particular
+            // call was made.
             return false;
         }
     }
